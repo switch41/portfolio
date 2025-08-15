@@ -15,6 +15,7 @@ import type {
 } from "convex/server";
 import type * as auth_emailOtp from "../auth/emailOtp.js";
 import type * as auth from "../auth.js";
+import type * as email from "../email.js";
 import type * as http from "../http.js";
 import type * as mutations from "../mutations.js";
 import type * as seed from "../seed.js";
@@ -32,6 +33,7 @@ import type * as users from "../users.js";
 declare const fullApi: ApiFromModules<{
   "auth/emailOtp": typeof auth_emailOtp;
   auth: typeof auth;
+  email: typeof email;
   http: typeof http;
   mutations: typeof mutations;
   seed: typeof seed;

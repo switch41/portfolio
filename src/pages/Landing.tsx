@@ -22,6 +22,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { Skills } from "@/components/portfolio/Skills";
 import { useState } from "react";
+import { useAction } from "convex/react";
+import { api } from "@/convex/_generated/api";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -93,18 +95,48 @@ const experience = [
 
 export default function Landing() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+
+  const sendEmail = useAction(api.email.send);
 
   const scrollToSection = (sectionId: string) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
     setIsMenuOpen(false);
   };
 
-  const handleContactSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleContactSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    toast.success("Message Sent!", {
-      description: "Thank you for reaching out. I'll get back to you shortly.",
-    });
-    (e.target as HTMLFormElement).reset();
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+    const toastId = toast.loading("Sending message...");
+
+    try {
+      await sendEmail({
+        name: formData.name,
+        fromEmail: formData.email,
+        message: formData.message,
+      });
+      toast.success("Message Sent!", {
+        id: toastId,
+        description: "Thank you for reaching out. I'll get back to you shortly.",
+      });
+      setFormData({ name: '', email: '', message: '' });
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to send message.", {
+        id: toastId,
+        description: "Please try again later or contact me directly via email.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -394,13 +426,39 @@ export default function Landing() {
             
             <form onSubmit={handleContactSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
-                <Input placeholder="Your Name" required className="bg-white/5 border-white/10 rounded-full"/>
-                <Input type="email" placeholder="Your Email" required className="bg-white/5 border-white/10 rounded-full"/>
+                <Input 
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  placeholder="Your Name" 
+                  required 
+                  className="bg-white/5 border-white/10 rounded-full"
+                  disabled={isSubmitting}
+                />
+                <Input 
+                  name="email"
+                  type="email" 
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  placeholder="Your Email" 
+                  required 
+                  className="bg-white/5 border-white/10 rounded-full"
+                  disabled={isSubmitting}
+                />
               </div>
-              <Textarea placeholder="Your Message" rows={5} required className="bg-white/5 border-white/10 rounded-2xl"/>
+              <Textarea 
+                name="message"
+                value={formData.message}
+                onChange={handleInputChange}
+                placeholder="Your Message" 
+                rows={5} 
+                required 
+                className="bg-white/5 border-white/10 rounded-2xl"
+                disabled={isSubmitting}
+              />
               <div className="text-center">
-                <Button type="submit" size="lg" className="y2k-button px-8 py-4">
-                  Send Message <Send className="w-4 h-4 ml-2" />
+                <Button type="submit" size="lg" className="y2k-button px-8 py-4" disabled={isSubmitting}>
+                  {isSubmitting ? "Sending..." : "Send Message"} <Send className="w-4 h-4 ml-2" />
                 </Button>
               </div>
             </form>
