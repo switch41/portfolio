@@ -10,7 +10,9 @@ import {
   Database,
   Cpu,
   Zap,
-  Briefcase
+  Briefcase,
+  Menu,
+  X
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -19,6 +21,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { Skills } from "@/components/portfolio/Skills";
+import { useState } from "react";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -89,8 +92,11 @@ const experience = [
 ];
 
 export default function Landing() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const scrollToSection = (sectionId: string) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    setIsMenuOpen(false);
   };
 
   const handleContactSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -132,13 +138,46 @@ export default function Landing() {
                 ))}
               </div>
               <ThemeToggle />
+              <div className="md:hidden">
+                <motion.button
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  className="p-2 rounded-md text-muted-foreground"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  aria-label="Toggle menu"
+                >
+                  {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                </motion.button>
+              </div>
             </div>
           </div>
         </div>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-background/80 backdrop-blur-lg"
+          >
+            <div className="flex flex-col items-center space-y-4 py-4">
+              {['About', 'Projects', 'Skills', 'Experience', 'Contact'].map((item) => (
+                <motion.button
+                  key={item}
+                  onClick={() => scrollToSection(item.toLowerCase())}
+                  className="text-muted-foreground hover:y2k-gradient-text transition-colors text-lg"
+                  whileHover={{ scale: 1.05, x: 5 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {item}
+                </motion.button>
+              ))}
+            </div>
+          </motion.div>
+        )}
       </motion.nav>
 
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
+      <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
         <div className="absolute inset-0 z-0">
           <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-500/30 rounded-full filter blur-3xl opacity-70 animate-blob"></div>
           <div className="absolute top-1/2 right-1/4 w-64 h-64 bg-cyan-500/30 rounded-full filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
@@ -152,10 +191,10 @@ export default function Landing() {
           animate="animate"
         >
           <motion.div variants={fadeInUp} className="mb-8">
-            <h1 className="text-5xl md:text-8xl font-black mb-6 y2k-gradient-text tracking-tighter">
+            <h1 className="text-5xl sm:text-6xl md:text-8xl font-black mb-6 y2k-gradient-text tracking-tighter">
               Kushal Parihar
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+            <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
               Blockchain & AI Dev • Full-Stack Engineer
             </p>
           </motion.div>
@@ -206,8 +245,8 @@ export default function Landing() {
             viewport={{ once: true }}
             className="max-w-4xl mx-auto text-center"
           >
-            <h2 className="text-4xl font-bold mb-8 y2k-gradient-text">About Me</h2>
-            <div className="text-lg text-muted-foreground space-y-6 leading-relaxed p-6 bg-white/5 rounded-3xl border border-white/10">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-8 y2k-gradient-text">About Me</h2>
+            <div className="text-base sm:text-lg text-muted-foreground space-y-6 leading-relaxed p-6 bg-white/5 rounded-3xl border border-white/10">
               <p>
                 Hey, I'm <span className="font-bold text-primary">kushal parihar (aka switch41)</span>. I'm a B.Tech CS student from Hyderabad, passionate about building cool stuff that makes a difference.
               </p>
@@ -230,7 +269,7 @@ export default function Landing() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-4xl font-bold text-center mb-16 y2k-gradient-text"
+            className="text-3xl sm:text-4xl font-bold text-center mb-16 y2k-gradient-text"
           >
             My Projects
           </motion.h2>
@@ -245,7 +284,7 @@ export default function Landing() {
                 viewport={{ once: true }}
                 className="bg-white/5 p-6 rounded-3xl border border-white/10 backdrop-blur-md group"
               >
-                <h3 className="text-2xl font-bold text-primary mb-2">{project.title}</h3>
+                <h3 className="text-xl sm:text-2xl font-bold text-primary mb-2">{project.title}</h3>
                 <Badge variant="outline" className="mb-4">{project.category}</Badge>
                 <p className="text-muted-foreground mb-4">{project.long}</p>
                 <div className="flex flex-wrap gap-2 mb-4">
@@ -276,14 +315,14 @@ export default function Landing() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-4xl font-bold text-center mb-16 y2k-gradient-text"
+            className="text-3xl sm:text-4xl font-bold text-center mb-16 y2k-gradient-text"
           >
             Experience
           </motion.h2>
           
           <div className="max-w-2xl mx-auto">
             <div>
-              <h3 className="text-2xl font-bold mb-8 text-primary flex items-center">
+              <h3 className="text-xl sm:text-2xl font-bold mb-8 text-primary flex items-center">
                 <Briefcase className="w-6 h-6 mr-3" />
                 Professional Experience
               </h3>
@@ -327,8 +366,8 @@ export default function Landing() {
             viewport={{ once: true }}
             className="max-w-2xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-center mb-8 y2k-gradient-text">Let's Connect</h2>
-            <p className="text-lg text-muted-foreground mb-12 text-center">
+            <h2 className="text-3xl sm:text-4xl font-bold text-center mb-8 y2k-gradient-text">Let's Connect</h2>
+            <p className="text-base sm:text-lg text-muted-foreground mb-12 text-center">
               Got a project or just want to say hi? Drop me a line.
             </p>
             

@@ -45,7 +45,7 @@ export function Skills() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-2xl font-bold mb-8 capitalize text-primary text-center md:text-left">
+              <h3 className="text-xl sm:text-2xl font-bold mb-8 capitalize text-primary text-center md:text-left">
                 {category}
               </h3>
               <div className="flex flex-wrap justify-center gap-4">
