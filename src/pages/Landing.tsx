@@ -410,7 +410,7 @@ export default function Landing() {
               ))}
             </div>
           <p className="text-sm">
-            © 2025 switch41. Built with Y2K vibes.
+            © 2025 switch41. Handcrafted with code.
           </p>
         </div>
       </footer>
