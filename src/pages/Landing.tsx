@@ -269,6 +269,12 @@ export default function Landing() {
                 From secure blockchain platforms to smart AI tools, if it's a fun challenge, I'm in.
               </p>
               <p>
+                I'm all about turning ideas into functional prototypes — even if they're messy, unfinished, or experimental.
+              </p>
+              <p>
+                That's where the real fun lives, right?
+              </p>
+              <p>
                 My specialties are <span className="font-bold text-primary/90">Blockchain</span>, <span className="font-bold text-primary/90">AI/ML</span>, and <span className="font-bold text-primary/90">full-stack development</span>.
               </p>
             </div>
