@@ -81,6 +81,15 @@ const skills = {
 
 const experience = [
   {
+    title: "Graphic Designer",
+    company: "IETE_ISF_VBIT",
+    period: "Sep 2024 – Jan 2025",
+    description: [
+      "Part-time graphic design role.",
+      "Ghatkesar, Telangana, India · Hybrid"
+    ]
+  },
+  {
     title: "Intern – Data Analytics & Process Automation",
     company: "Alteryx SparkED",
     period: "Jul 2024 – Sep 2024",
@@ -406,7 +415,7 @@ export default function Landing() {
             <div>
               <h3 className="text-2xl font-bold mb-8 text-primary flex items-center">
                 <Award className="w-6 h-6 mr-3" />
-                Certifications
+                Achievements
               </h3>
               <div className="space-y-4">
                 {achievements.map((achievement, index) => (
