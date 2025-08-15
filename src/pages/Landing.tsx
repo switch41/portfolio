@@ -371,7 +371,7 @@ export default function Landing() {
               ))}
             </div>
           <p className="text-sm">
-            © 2024 Kushal Parihar. Built with Y2K vibes.
+            © 2025 switch41. Built with Y2K vibes.
           </p>
         </div>
       </footer>
