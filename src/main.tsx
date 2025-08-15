@@ -44,12 +44,14 @@ createRoot(document.getElementById("root")!).render(
       <ConvexAuthProvider client={convex}>
         <BrowserRouter>
           <RouteSyncer />
-          <Routes>
-            <Route path="*" element={<NotFound />} />
-            <Route path="/" element={<Landing />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-          </Routes>
+          <div className="dark">
+            <Routes>
+              <Route path="*" element={<NotFound />} />
+              <Route path="/" element={<Landing />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+            </Routes>
+          </div>
         </BrowserRouter>
         <Toaster />
       </ConvexAuthProvider>
