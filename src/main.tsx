@@ -11,6 +11,7 @@ import "./index.css";
 import Dashboard from "./pages/Dashboard.tsx";
 import Landing from "./pages/Landing.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import { ThemeProvider } from "./components/theme-provider";
 
 const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL as string);
 
@@ -42,18 +43,18 @@ createRoot(document.getElementById("root")!).render(
     <VlyToolbar />
     <InstrumentationProvider>
       <ConvexAuthProvider client={convex}>
-        <BrowserRouter>
-          <RouteSyncer />
-          <div className="dark">
+        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+          <BrowserRouter>
+            <RouteSyncer />
             <Routes>
               <Route path="*" element={<NotFound />} />
               <Route path="/" element={<Landing />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/dashboard" element={<Dashboard />} />
             </Routes>
-          </div>
-        </BrowserRouter>
-        <Toaster />
+          </BrowserRouter>
+          <Toaster />
+        </ThemeProvider>
       </ConvexAuthProvider>
     </InstrumentationProvider>
   </StrictMode>,

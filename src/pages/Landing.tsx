@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -40,16 +41,14 @@ const projects = [
     tech: ["React", "Solidity", "Ethereum", "Web3.js", "MetaMask"],
     category: "Blockchain / Web",
     github: "#",
-    color: "green"
   },
   {
-    title: "Redact Tool",
+    title: "Redact Tool", 
     short: "AI-powered tool for sensitive data detection and redaction (~80% accuracy).",
     long: "Developed a system that automatically detects and redacts personal information from documents, using NLP for text detection and OpenCV for image-based redaction. Designed for privacy compliance and real-world security needs.",
     tech: ["Python", "Flask", "NLP", "OpenCV", "Regex"],
     category: "AI / Privacy",
     github: "#",
-    color: "pink"
   },
   {
     title: "Switch Healthcare",
@@ -58,7 +57,6 @@ const projects = [
     tech: ["React", "Flask", "Python", "NLP"],
     category: "AI / Healthcare",
     github: "#",
-    color: "blue"
   },
   {
     title: "AI-Powered Chatbot",
@@ -67,7 +65,6 @@ const projects = [
     tech: ["Python", "Flask", "NLP", "Transformers"],
     category: "AI / Web",
     github: "#",
-    color: "green"
   }
 ];
 
@@ -121,26 +118,29 @@ export default function Landing() {
         animate={{ opacity: 1, y: 0 }}
         className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border"
       >
-        <div className="container mx-auto px-6 py-4">
+        <div className="container mx-auto px-6 py-3">
           <div className="flex justify-between items-center">
             <motion.div 
-              className="text-xl font-bold gradient-text"
+              className="text-xl font-bold text-foreground"
               whileHover={{ scale: 1.05 }}
             >
               Kushal Parihar
             </motion.div>
-            <div className="hidden md:flex space-x-8">
-              {['About', 'Projects', 'Skills', 'Experience', 'Contact'].map((item) => (
-                <motion.button
-                  key={item}
-                  onClick={() => scrollToSection(item.toLowerCase())}
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {item}
-                </motion.button>
-              ))}
+            <div className="flex items-center space-x-4">
+              <div className="hidden md:flex space-x-8">
+                {['About', 'Projects', 'Skills', 'Experience', 'Contact'].map((item) => (
+                  <motion.button
+                    key={item}
+                    onClick={() => scrollToSection(item.toLowerCase())}
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    {item}
+                  </motion.button>
+                ))}
+              </div>
+              <ThemeToggle />
             </div>
           </div>
         </div>
@@ -148,7 +148,6 @@ export default function Landing() {
 
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-secondary/20"></div>
         <motion.div 
           className="container mx-auto px-6 text-center relative z-10"
           variants={staggerContainer}
@@ -159,8 +158,8 @@ export default function Landing() {
             variants={fadeInUp}
             className="mb-8"
           >
-            <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              <span className="gradient-text text-glow">Kushal Parihar</span>
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-foreground">
+              Kushal Parihar
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
               B.Tech Computer Science Student • Blockchain & AI Developer • Full-Stack Engineer
@@ -173,7 +172,6 @@ export default function Landing() {
           >
             <Button 
               onClick={() => scrollToSection('projects')}
-              className="glow-green hover:glow-green"
               size="lg"
             >
               View Projects
@@ -181,7 +179,6 @@ export default function Landing() {
             <Button 
               variant="outline" 
               onClick={() => scrollToSection('contact')}
-              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
               size="lg"
             >
               Get In Touch
@@ -202,7 +199,7 @@ export default function Landing() {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 rounded-full border border-border hover:border-primary transition-colors glow-green"
+                className="p-3 rounded-full border border-border hover:border-primary hover:bg-primary/10 transition-colors"
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -222,7 +219,7 @@ export default function Landing() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 bg-secondary/20">
+      <section id="about" className="py-20">
         <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 60 }}
@@ -231,7 +228,7 @@ export default function Landing() {
             viewport={{ once: true }}
             className="max-w-4xl mx-auto text-center"
           >
-            <h2 className="text-4xl font-bold mb-8 gradient-text">About Me</h2>
+            <h2 className="text-4xl font-bold mb-8 text-foreground">About Me</h2>
             <div className="text-lg text-muted-foreground space-y-6 leading-relaxed">
               <p>
                 Hi, I'm <span className="text-primary font-semibold">Kushal Parihar</span> — a B.Tech Computer Science student from Hyderabad with a passion for building impactful, scalable, and secure applications.
@@ -240,7 +237,7 @@ export default function Landing() {
                 If it sounds fun or solves a real problem, I'll probably build it — from blockchain-based prediction platforms to AI-powered privacy tools.
               </p>
               <p>
-                I specialize in <span className="text-accent font-semibold">Blockchain</span>, <span className="text-blue-400 font-semibold">AI/ML</span>, and <span className="text-primary font-semibold">full-stack development</span> with strong skills in Python, JavaScript, Solidity, and React.
+                I specialize in <span className="font-semibold text-primary/90">Blockchain</span>, <span className="font-semibold text-primary/90">AI/ML</span>, and <span className="font-semibold text-primary/90">full-stack development</span> with strong skills in Python, JavaScript, Solidity, and React.
               </p>
               <p>
                 I thrive in hackathons, enjoy collaborating with teams, and love turning ideas into functional products. I'm currently seeking remote or hybrid SDE internships starting August 2025 to work on innovative and challenging projects.
@@ -258,7 +255,7 @@ export default function Landing() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-4xl font-bold text-center mb-16 gradient-text"
+            className="text-4xl font-bold text-center mb-16 text-foreground"
           >
             Featured Projects
           </motion.h2>
@@ -271,10 +268,7 @@ export default function Landing() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className={`card-glow p-6 rounded-lg hover:scale-105 transition-all duration-300 ${
-                  project.color === 'green' ? 'hover:glow-green' : 
-                  project.color === 'pink' ? 'hover:glow-pink' : 'hover:glow-blue'
-                }`}
+                className="glass-card p-6 hover:scale-103 transition-all duration-300"
               >
                 <div className="flex justify-between items-start mb-4">
                   <h3 className="text-xl font-bold text-primary">{project.title}</h3>
@@ -297,7 +291,6 @@ export default function Landing() {
                   <Button 
                     variant="ghost" 
                     size="sm"
-                    className="text-primary hover:text-primary-foreground hover:bg-primary"
                   >
                     <Github className="w-4 h-4 mr-2" />
                     View Code
@@ -305,7 +298,6 @@ export default function Landing() {
                   <Button 
                     variant="ghost" 
                     size="sm"
-                    className="text-accent hover:text-accent-foreground hover:bg-accent"
                   >
                     <ExternalLink className="w-4 h-4 mr-2" />
                     Live Demo
@@ -318,14 +310,14 @@ export default function Landing() {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="py-20 bg-secondary/20">
+      <section id="skills" className="py-20">
         <div className="container mx-auto px-6">
           <motion.h2 
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-4xl font-bold text-center mb-16 gradient-text"
+            className="text-4xl font-bold text-center mb-16 text-foreground"
           >
             Tech Stack & Skills
           </motion.h2>
@@ -338,19 +330,19 @@ export default function Landing() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="card-glow p-6 rounded-lg"
+                className="glass-card p-6"
               >
                 <div className="flex items-center mb-4">
                   {category.includes('Programming') && <Code className="w-6 h-6 text-primary mr-3" />}
-                  {category.includes('Frameworks') && <Zap className="w-6 h-6 text-accent mr-3" />}
-                  {category.includes('Blockchain') && <Database className="w-6 h-6 text-blue-400 mr-3" />}
-                  {category.includes('AI') && <Cpu className="w-6 h-6 text-purple-400 mr-3" />}
-                  {category.includes('Tools') && <Award className="w-6 h-6 text-orange-400 mr-3" />}
+                  {category.includes('Frameworks') && <Zap className="w-6 h-6 text-primary mr-3" />}
+                  {category.includes('Blockchain') && <Database className="w-6 h-6 text-primary mr-3" />}
+                  {category.includes('AI') && <Cpu className="w-6 h-6 text-primary mr-3" />}
+                  {category.includes('Tools') && <Award className="w-6 h-6 text-primary mr-3" />}
                   <h3 className="text-lg font-semibold">{category}</h3>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {skillList.map((skill) => (
-                    <Badge key={skill} variant="outline" className="text-xs hover:bg-primary hover:text-primary-foreground transition-colors">
+                    <Badge key={skill} variant="secondary" className="text-xs">
                       {skill}
                     </Badge>
                   ))}
@@ -369,7 +361,7 @@ export default function Landing() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-4xl font-bold text-center mb-16 gradient-text"
+            className="text-4xl font-bold text-center mb-16 text-foreground"
           >
             Experience & Achievements
           </motion.h2>
@@ -389,12 +381,12 @@ export default function Landing() {
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     viewport={{ once: true }}
-                    className="card-glow p-6 rounded-lg"
+                    className="glass-card p-6"
                   >
                     <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
                       <div>
                         <h4 className="text-lg font-semibold text-primary">{exp.title}</h4>
-                        <p className="text-accent font-medium">{exp.company}</p>
+                        <p className="text-muted-foreground font-medium">{exp.company}</p>
                       </div>
                       <Badge variant="outline" className="mt-2 md:mt-0">
                         {exp.period}
@@ -427,9 +419,9 @@ export default function Landing() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     viewport={{ once: true }}
-                    className="card-glow p-4 rounded-lg flex items-start"
+                    className="glass-card p-4 flex items-start"
                   >
-                    <GraduationCap className="w-5 h-5 text-accent mr-3 mt-0.5 flex-shrink-0" />
+                    <GraduationCap className="w-5 h-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
                     <p className="text-sm text-muted-foreground">{achievement}</p>
                   </motion.div>
                 ))}
@@ -440,7 +432,7 @@ export default function Landing() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-secondary/20">
+      <section id="contact" className="py-20">
         <div className="container mx-auto px-6 text-center">
           <motion.div
             initial={{ opacity: 0, y: 60 }}
@@ -448,7 +440,7 @@ export default function Landing() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl font-bold mb-8 gradient-text">Let's Connect</h2>
+            <h2 className="text-4xl font-bold mb-8 text-foreground">Let's Connect</h2>
             <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">
               I'm currently seeking remote or hybrid SDE internships starting August 2025. 
               Let's discuss how we can work together on innovative projects!
@@ -469,22 +461,22 @@ export default function Landing() {
                 className="flex items-center text-muted-foreground"
                 whileHover={{ scale: 1.05 }}
               >
-                <MapPin className="w-5 h-5 mr-3 text-accent" />
+                <MapPin className="w-5 h-5 mr-3 text-primary" />
                 Hyderabad, India
               </motion.div>
             </div>
 
             <div className="flex justify-center space-x-6">
               {[
-                { icon: Github, href: "https://github.com/switch41", label: "GitHub", color: "glow-green" },
-                { icon: Linkedin, href: "https://linkedin.com/in/kushal-parihar", label: "LinkedIn", color: "glow-blue" }
-              ].map(({ icon: Icon, href, label, color }) => (
+                { icon: Github, href: "https://github.com/switch41", label: "GitHub" },
+                { icon: Linkedin, href: "https://linkedin.com/in/kushal-parihar", label: "LinkedIn" }
+              ].map(({ icon: Icon, href, label }) => (
                 <motion.a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`p-4 rounded-full border border-border hover:border-primary transition-colors ${color}`}
+                  className="p-4 rounded-full border border-border hover:border-primary hover:bg-primary/10 transition-colors"
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   whileTap={{ scale: 0.95 }}
                 >
