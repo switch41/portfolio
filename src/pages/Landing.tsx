@@ -263,7 +263,7 @@ export default function Landing() {
             <h2 className="text-3xl sm:text-4xl font-bold mb-8 y2k-gradient-text">About Me</h2>
             <div className="text-base sm:text-lg text-muted-foreground space-y-6 leading-relaxed p-6 bg-white/5 rounded-3xl border border-white/10">
               <p>
-                Hey, I'm <span className="font-bold text-primary">kushal parihar (aka switch41)</span>. I'm a B.Tech CS student from Hyderabad, passionate about building cool stuff that makes a difference.
+                Hey, I'm <span className="font-bold text-primary">kushal parihar (aka switch41)</span>. I'm passionate about building cool stuff that makes a difference.
               </p>
               <p>
                 From secure blockchain platforms to smart AI tools, if it's a fun challenge, I'm in.
