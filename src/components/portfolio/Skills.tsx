@@ -23,9 +23,9 @@ export function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-12 md:mb-16"
+          className="text-center"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold mb-6 y2k-gradient-text">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-12 y2k-gradient-text">
             Skills & Tech
           </h2>
         </motion.div>

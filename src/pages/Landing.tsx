@@ -238,10 +238,10 @@ export default function Landing() {
           animate="animate"
         >
           <motion.div variants={fadeInUp} className="mb-8">
-            <h1 className="text-5xl sm:text-6xl md:text-8xl font-black mb-6 y2k-gradient-text tracking-tighter">
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black mb-6 y2k-gradient-text tracking-tighter">
               Kushal Parihar
             </h1>
-            <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
               Blockchain & AI Dev • Full-Stack Engineer
             </p>
           </motion.div>
@@ -292,7 +292,7 @@ export default function Landing() {
             viewport={{ once: true }}
             className="max-w-4xl mx-auto text-center"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold mb-8 y2k-gradient-text">About Me</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-12 y2k-gradient-text">About Me</h2>
             <div className="text-base sm:text-lg text-muted-foreground space-y-6 leading-relaxed p-6 bg-white/5 rounded-3xl border border-white/10">
               <p>
                 Hey, I'm <span className="font-bold text-primary">kushal parihar (aka switch41)</span>. I'm passionate about building cool stuff that makes a difference.
@@ -322,7 +322,7 @@ export default function Landing() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-4xl font-bold text-center mb-16 y2k-gradient-text"
+            className="text-3xl sm:text-4xl font-bold text-center mb-12 y2k-gradient-text"
           >
             My Projects
           </motion.h2>
@@ -368,7 +368,7 @@ export default function Landing() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-4xl font-bold text-center mb-16 y2k-gradient-text"
+            className="text-3xl sm:text-4xl font-bold text-center mb-12 y2k-gradient-text"
           >
             Experience
           </motion.h2>
@@ -419,7 +419,7 @@ export default function Landing() {
             viewport={{ once: true }}
             className="max-w-2xl mx-auto"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-center mb-8 y2k-gradient-text">Let's Connect</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 y2k-gradient-text">Let's Connect</h2>
             <p className="text-base sm:text-lg text-muted-foreground mb-12 text-center">
               Got a project or just want to say hi? Drop me a line.
             </p>
