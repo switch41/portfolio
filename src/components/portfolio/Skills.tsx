@@ -57,10 +57,10 @@ export function Skills() {
                     transition={{ duration: 0.5, delay: skillIndex * 0.05 }}
                     viewport={{ once: true }}
                     whileHover={{ scale: 1.05, y: -5, rotate: 2 }}
-                    className="bg-white/10 backdrop-blur-lg border border-white/20 p-4 rounded-2xl flex items-center gap-4 w-full sm:w-[220px] transition-all duration-300"
+                    className="bg-card/60 backdrop-blur-lg border border-border p-4 rounded-2xl flex items-center gap-4 w-full sm:w-[220px] transition-all duration-300"
                   >
                     {skill.logoUrl ? (
-                      <div className="w-10 h-10 flex-shrink-0 bg-white/10 rounded-full flex items-center justify-center p-1">
+                      <div className="w-10 h-10 flex-shrink-0 bg-black/20 rounded-full flex items-center justify-center p-1.5 shadow-inner shadow-black/50">
                         <motion.img
                           src={skill.logoUrl}
                           alt={`${skill.name} logo`}
@@ -70,7 +70,7 @@ export function Skills() {
                       </div>
                     ) : (
                       <motion.div
-                        className="bg-primary/20 w-10 h-10 flex-shrink-0 flex items-center justify-center rounded-full text-xl font-bold text-primary"
+                        className="bg-primary/20 w-10 h-10 flex-shrink-0 flex items-center justify-center rounded-full text-xl font-bold text-primary shadow-inner shadow-black/50"
                         transition={{ duration: 0.6 }}
                       >
                         {skill.name.charAt(0)}
