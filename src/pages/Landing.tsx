@@ -156,7 +156,7 @@ export default function Landing() {
               Kushal Parihar
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              B.Tech CSE Student • Blockchain & AI Dev • Full-Stack Engineer
+              Blockchain & AI Dev • Full-Stack Engineer
             </p>
           </motion.div>
           
