@@ -124,17 +124,32 @@ export default function Landing() {
               switch41
             </motion.div>
             <div className="flex items-center space-x-2">
-              <div className="hidden md:flex space-x-6">
+              <div className="hidden md:flex items-center space-x-6">
                 {['About', 'Projects', 'Skills', 'Experience', 'Contact'].map((item) => (
-                  <motion.button
+                  <motion.div
                     key={item}
-                    onClick={() => scrollToSection(item.toLowerCase())}
-                    className="text-muted-foreground hover:y2k-gradient-text transition-colors"
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
+                    className="relative"
+                    whileHover="hover"
+                    initial="rest"
+                    animate="rest"
                   >
-                    {item}
-                  </motion.button>
+                    <motion.button
+                      onClick={() => scrollToSection(item.toLowerCase())}
+                      className="text-muted-foreground hover:y2k-gradient-text transition-colors pb-1"
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      {item}
+                    </motion.button>
+                    <motion.div
+                      className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary origin-center"
+                      variants={{
+                        rest: { scaleX: 0 },
+                        hover: { scaleX: 1 }
+                      }}
+                      transition={{ duration: 0.3, ease: "circOut" }}
+                    />
+                  </motion.div>
                 ))}
               </div>
               <ThemeToggle />
