@@ -61,12 +61,14 @@ export function Skills() {
                     className="bg-card/60 backdrop-blur-lg border border-border/50 hover:border-primary/50 p-4 rounded-xl flex items-center gap-4 w-full sm:w-[240px] transition-all duration-300"
                   >
                     {skill.logoUrl ? (
-                      <motion.img
-                        src={skill.logoUrl}
-                        alt={`${skill.name} logo`}
-                        className="w-10 h-10 object-contain"
-                        transition={{ duration: 0.3 }}
-                      />
+                      <div className="w-12 h-12 flex-shrink-0 bg-foreground/5 rounded-lg flex items-center justify-center p-1">
+                        <motion.img
+                          src={skill.logoUrl}
+                          alt={`${skill.name} logo`}
+                          className="w-full h-full object-contain"
+                          transition={{ duration: 0.3 }}
+                        />
+                      </div>
                     ) : (
                       <motion.div
                         className="bg-primary/10 w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-full text-2xl font-bold text-primary"

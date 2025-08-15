@@ -16,6 +16,8 @@ import type {
 import type * as auth_emailOtp from "../auth/emailOtp.js";
 import type * as auth from "../auth.js";
 import type * as http from "../http.js";
+import type * as mutations from "../mutations.js";
+import type * as seed from "../seed.js";
 import type * as skills from "../skills.js";
 import type * as users from "../users.js";
 
@@ -31,6 +33,8 @@ declare const fullApi: ApiFromModules<{
   "auth/emailOtp": typeof auth_emailOtp;
   auth: typeof auth;
   http: typeof http;
+  mutations: typeof mutations;
+  seed: typeof seed;
   skills: typeof skills;
   users: typeof users;
 }>;
