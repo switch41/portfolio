@@ -3,17 +3,14 @@ import {
   Github, 
   Linkedin, 
   Mail, 
-  MapPin,
+  ChevronDown,
+  Star,
+  Send,
   Code,
   Database,
   Cpu,
   Zap,
-  Award,
-  Briefcase,
-  GraduationCap,
-  ChevronDown,
-  Star,
-  Send
+  Briefcase
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -21,6 +18,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import { Skills } from "@/components/portfolio/Skills";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -39,45 +37,26 @@ const staggerContainer = {
 const projects = [
   {
     title: "Prediction Market",
-    short: "Blockchain-based event prediction platform with 99.9% uptime.",
-    long: "Built a decentralized prediction platform where users can create and participate in event forecasts. All transactions are executed via Ethereum smart contracts for transparency and immutability, with Web3.js integration for blockchain connectivity.",
-    tech: ["React", "Solidity", "Ethereum", "Web3.js", "MetaMask"],
-    category: "Blockchain / Web",
+    long: "A decentralized prediction platform on the Ethereum blockchain, enabling users to forecast event outcomes with smart contracts.",
+    tech: ["React", "Solidity", "Web3.js", "MetaMask"],
+    category: "Blockchain",
     github: "#",
   },
   {
     title: "Redact Tool", 
-    short: "AI-powered tool for sensitive data detection and redaction (~80% accuracy).",
-    long: "Developed a system that automatically detects and redacts personal information from documents, using NLP for text detection and OpenCV for image-based redaction. Designed for privacy compliance and real-world security needs.",
-    tech: ["Python", "Flask", "NLP", "OpenCV", "Regex"],
-    category: "AI / Privacy",
+    long: "An AI-powered tool for detecting and redacting sensitive data from documents, ensuring privacy and compliance.",
+    tech: ["Python", "Flask", "NLP", "OpenCV"],
+    category: "AI/ML",
     github: "#",
   },
   {
     title: "Switch Healthcare",
-    short: "AI healthcare assistant with HIPAA-compliant design.",
-    long: "Created a healthcare platform to assist with symptom checking, medication reminders, and patient record management, using NLP for natural language understanding and a secure backend for HIPAA compliance.",
+    long: "A HIPAA-compliant AI healthcare assistant for symptom checking, medication reminders, and patient record management.",
     tech: ["React", "Flask", "Python", "NLP"],
-    category: "AI / Healthcare",
+    category: "AI/Healthcare",
     github: "#",
   },
-  {
-    title: "AI-Powered Chatbot",
-    short: "Conversational chatbot with advanced natural language processing.",
-    long: "Designed a chatbot that can handle multi-turn conversations, provide informative responses, and adapt to different domains, built with Python NLP models and deployed via a Flask backend.",
-    tech: ["Python", "Flask", "NLP", "Transformers"],
-    category: "AI / Web",
-    github: "#",
-  }
 ];
-
-const skills = {
-  "Programming Languages": ["Python", "JavaScript", "Solidity", "SQL", "HTML5", "CSS3"],
-  "Frameworks & Libraries": ["React", "Flask", "FastAPI", "OpenCV", "Tailwind CSS", "Bootstrap", "REST APIs", "Web3.js"],
-  "Blockchain Technologies": ["Ethereum", "Smart Contracts", "MetaMask", "IPFS", "Truffle"],
-  "AI & Machine Learning": ["Artificial Intelligence", "Machine Learning", "NLP", "spaCy", "Transformers", "MediaPipe", "Computer Vision"],
-  "Tools & Platforms": ["Git", "GitHub", "Postman", "Render", "Docker", "Tesseract OCR", "Ganache"]
-};
 
 const experience = [
   {
@@ -109,14 +88,6 @@ const experience = [
   }
 ];
 
-const achievements = [
-  "Team Leader – Team Rookie, internal hackathon winners for Smart India Hackathon (SIH) 2024",
-  "Runner-up – Swoparnika-2k23 tech competition (VBIT)",
-  "Programming Essentials in Python (PCAP) – Cisco Networking Academy",
-  "NDG Linux Essentials – Cisco Networking Academy",
-  "Continuous Integration & Delivery – DevOps – Infosys Springboard"
-];
-
 export default function Landing() {
   const scrollToSection = (sectionId: string) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
@@ -124,7 +95,6 @@ export default function Landing() {
 
   const handleContactSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // NOTE: This is a UI demonstration. A backend mutation would be needed to make this form functional.
     toast.success("Message Sent!", {
       description: "Thank you for reaching out. I'll get back to you shortly.",
     });
@@ -132,29 +102,29 @@ export default function Landing() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground font-['Arial_Rounded_MT_Bold',_'Helvetica_Rounded',_Arial,_sans-serif]">
       {/* Navigation */}
       <motion.nav 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border"
+        className="fixed top-0 w-full z-50 bg-background/30 backdrop-blur-lg border-b border-white/20"
       >
         <div className="container mx-auto px-6 py-3">
           <div className="flex justify-between items-center">
             <motion.div 
-              className="text-xl font-bold text-foreground"
+              className="text-xl font-bold y2k-gradient-text"
               whileHover={{ scale: 1.05 }}
             >
-              Kushal Parihar
+              kushal.parihar
             </motion.div>
-            <div className="flex items-center space-x-4">
-              <div className="hidden md:flex space-x-8">
+            <div className="flex items-center space-x-2">
+              <div className="hidden md:flex space-x-6">
                 {['About', 'Projects', 'Skills', 'Experience', 'Contact'].map((item) => (
                   <motion.button
                     key={item}
                     onClick={() => scrollToSection(item.toLowerCase())}
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                    whileHover={{ scale: 1.1 }}
+                    className="text-muted-foreground hover:y2k-gradient-text transition-colors"
+                    whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                   >
                     {item}
@@ -169,47 +139,34 @@ export default function Landing() {
 
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-500/30 rounded-full filter blur-3xl opacity-70 animate-blob"></div>
+          <div className="absolute top-1/2 right-1/4 w-64 h-64 bg-cyan-500/30 rounded-full filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
+          <div className="absolute bottom-1/4 left-1/3 w-64 h-64 bg-pink-500/30 rounded-full filter blur-3xl opacity-70 animate-blob animation-delay-4000"></div>
+        </div>
+        
         <motion.div 
           className="container mx-auto px-6 text-center relative z-10"
           variants={staggerContainer}
           initial="initial"
           animate="animate"
         >
-          <motion.div
-            variants={fadeInUp}
-            className="mb-8"
-          >
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-foreground">
+          <motion.div variants={fadeInUp} className="mb-8">
+            <h1 className="text-5xl md:text-8xl font-black mb-6 y2k-gradient-text tracking-tighter">
               Kushal Parihar
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              B.Tech Computer Science Student • Blockchain & AI Developer • Full-Stack Engineer
+              B.Tech CSE Student • Blockchain & AI Dev • Full-Stack Engineer
             </p>
           </motion.div>
           
-          <motion.div
-            variants={fadeInUp}
-            className="flex flex-wrap justify-center gap-4 mb-12"
-          >
-            <Button 
-              onClick={() => scrollToSection('projects')}
-              size="lg"
-            >
-              View Projects
-            </Button>
-            <Button 
-              variant="outline" 
-              onClick={() => scrollToSection('contact')}
-              size="lg"
-            >
-              Get In Touch
+          <motion.div variants={fadeInUp} className="flex flex-wrap justify-center gap-4 mb-12">
+            <Button onClick={() => scrollToSection('projects')} size="lg" className="y2k-button px-8 py-4">
+              View My Work
             </Button>
           </motion.div>
 
-          <motion.div
-            variants={fadeInUp}
-            className="flex justify-center space-x-6"
-          >
+          <motion.div variants={fadeInUp} className="flex justify-center space-x-4">
             {[
               { icon: Github, href: "https://github.com/switch41", label: "GitHub" },
               { icon: Linkedin, href: "https://linkedin.com/in/kushal-parihar", label: "LinkedIn" },
@@ -220,7 +177,7 @@ export default function Landing() {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 rounded-full border border-border hover:border-primary hover:bg-primary/10 transition-colors"
+                className="p-3 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm hover:bg-white/20 transition-colors"
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -249,16 +206,16 @@ export default function Landing() {
             viewport={{ once: true }}
             className="max-w-4xl mx-auto text-center"
           >
-            <h2 className="text-4xl font-bold mb-8 text-foreground">About Me</h2>
-            <div className="text-lg text-muted-foreground space-y-6 leading-relaxed">
+            <h2 className="text-4xl font-bold mb-8 y2k-gradient-text">About Me</h2>
+            <div className="text-lg text-muted-foreground space-y-6 leading-relaxed p-6 bg-white/5 rounded-3xl border border-white/10">
               <p>
-                Hi, I'm <span className="text-primary font-semibold">kushal parihar aka switch41</span> — a B.Tech Computer Science student from Hyderabad with a passion for building impactful, scalable, and secure applications.
+                Hey, I'm <span className="font-bold text-primary">kushal parihar (aka switch41)</span>. I'm a B.Tech CS student from Hyderabad, passionate about building cool stuff that makes a difference.
               </p>
               <p>
-                If it sounds fun or solves a real problem, I'll probably build it — from blockchain-based prediction platforms to AI-powered privacy tools.
+                From secure blockchain platforms to smart AI tools, if it's a fun challenge, I'm in.
               </p>
               <p>
-                I specialize in <span className="font-semibold text-primary/90">Blockchain</span>, <span className="font-semibold text-primary/90">AI/ML</span>, and <span className="font-semibold text-primary/90">full-stack development</span> with strong skills in Python, JavaScript, Solidity, and React.
+                My specialties are <span className="font-bold text-primary/90">Blockchain</span>, <span className="font-bold text-primary/90">AI/ML</span>, and <span className="font-bold text-primary/90">full-stack development</span>.
               </p>
             </div>
           </motion.div>
@@ -273,12 +230,12 @@ export default function Landing() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-4xl font-bold text-center mb-16 text-foreground"
+            className="text-4xl font-bold text-center mb-16 y2k-gradient-text"
           >
-            Featured Projects
+            My Projects
           </motion.h2>
           
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
               <motion.div
                 key={project.title}
@@ -286,30 +243,18 @@ export default function Landing() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="glass-card p-6"
+                className="bg-white/5 p-6 rounded-3xl border border-white/10 backdrop-blur-md group"
               >
-                <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-xl font-bold text-primary">{project.title}</h3>
-                  <Badge variant="outline" className="text-xs">
-                    {project.category}
-                  </Badge>
-                </div>
-                
+                <h3 className="text-2xl font-bold text-primary mb-2">{project.title}</h3>
+                <Badge variant="outline" className="mb-4">{project.category}</Badge>
                 <p className="text-muted-foreground mb-4">{project.long}</p>
-                
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tech.map((tech) => (
-                    <Badge key={tech} variant="secondary" className="text-xs">
-                      {tech}
-                    </Badge>
+                    <Badge key={tech} variant="secondary">{tech}</Badge>
                   ))}
                 </div>
-                
                 <a href={project.github} target="_blank" rel="noopener noreferrer">
-                  <Button 
-                    variant="ghost" 
-                    size="sm"
-                  >
+                  <Button variant="ghost" size="sm" className="y2k-button mt-4">
                     <Github className="w-4 h-4 mr-2" />
                     View Code
                   </Button>
@@ -321,48 +266,7 @@ export default function Landing() {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="py-20">
-        <div className="container mx-auto px-6">
-          <motion.h2 
-            initial={{ opacity: 0, y: 60 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-4xl font-bold text-center mb-16 text-foreground"
-          >
-            Tech Stack & Skills
-          </motion.h2>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {Object.entries(skills).map(([category, skillList], index) => (
-              <motion.div
-                key={category}
-                initial={{ opacity: 0, y: 60 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="glass-card p-6"
-              >
-                <div className="flex items-center mb-4">
-                  {category.includes('Programming') && <Code className="w-6 h-6 text-primary mr-3" />}
-                  {category.includes('Frameworks') && <Zap className="w-6 h-6 text-primary mr-3" />}
-                  {category.includes('Blockchain') && <Database className="w-6 h-6 text-primary mr-3" />}
-                  {category.includes('AI') && <Cpu className="w-6 h-6 text-primary mr-3" />}
-                  {category.includes('Tools') && <Award className="w-6 h-6 text-primary mr-3" />}
-                  <h3 className="text-lg font-semibold">{category}</h3>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {skillList.map((skill) => (
-                    <Badge key={skill} variant="secondary" className="text-xs">
-                      {skill}
-                    </Badge>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Skills />
 
       {/* Experience Section */}
       <section id="experience" className="py-20">
@@ -372,19 +276,18 @@ export default function Landing() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-4xl font-bold text-center mb-16 text-foreground"
+            className="text-4xl font-bold text-center mb-16 y2k-gradient-text"
           >
             Experience
           </motion.h2>
           
           <div className="max-w-2xl mx-auto">
-            {/* Experience Timeline */}
             <div>
               <h3 className="text-2xl font-bold mb-8 text-primary flex items-center">
                 <Briefcase className="w-6 h-6 mr-3" />
                 Professional Experience
               </h3>
-              <div className="relative border-l-2 border-border/50 pl-8 space-y-12">
+              <div className="relative border-l-2 border-primary/30 pl-8 space-y-12">
                 {experience.map((exp, index) => (
                   <motion.div
                     key={exp.title}
@@ -394,7 +297,7 @@ export default function Landing() {
                     viewport={{ once: true }}
                     className="relative"
                   >
-                    <div className="absolute -left-[38px] top-1.5 w-4 h-4 bg-primary rounded-full border-4 border-background"></div>
+                    <div className="absolute -left-[39px] top-1.5 w-4 h-4 bg-primary rounded-full border-4 border-background"></div>
                     <p className="text-sm text-muted-foreground mb-1">{exp.period}</p>
                     <h4 className="text-lg font-semibold text-primary">{exp.title}</h4>
                     <p className="text-muted-foreground font-medium mb-3">{exp.company}</p>
@@ -424,19 +327,19 @@ export default function Landing() {
             viewport={{ once: true }}
             className="max-w-2xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-center mb-8 text-foreground">Let's Connect</h2>
+            <h2 className="text-4xl font-bold text-center mb-8 y2k-gradient-text">Let's Connect</h2>
             <p className="text-lg text-muted-foreground mb-12 text-center">
-              Have a question or want to work together? Drop me a message.
+              Got a project or just want to say hi? Drop me a line.
             </p>
             
             <form onSubmit={handleContactSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
-                <Input placeholder="Your Name" required />
-                <Input type="email" placeholder="Your Email" required />
+                <Input placeholder="Your Name" required className="bg-white/5 border-white/10 rounded-full"/>
+                <Input type="email" placeholder="Your Email" required className="bg-white/5 border-white/10 rounded-full"/>
               </div>
-              <Textarea placeholder="Your Message" rows={5} required />
+              <Textarea placeholder="Your Message" rows={5} required className="bg-white/5 border-white/10 rounded-2xl"/>
               <div className="text-center">
-                <Button type="submit" size="lg">
+                <Button type="submit" size="lg" className="y2k-button px-8 py-4">
                   Send Message <Send className="w-4 h-4 ml-2" />
                 </Button>
               </div>
@@ -446,7 +349,7 @@ export default function Landing() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 border-t border-border">
+      <footer className="py-8 border-t border-white/10">
         <div className="container mx-auto px-6 text-center text-muted-foreground">
           <div className="flex justify-center space-x-6 mb-4">
               {[
@@ -468,7 +371,7 @@ export default function Landing() {
               ))}
             </div>
           <p className="text-sm">
-            © 2024 Kushal Parihar. All rights reserved.
+            © 2024 Kushal Parihar. Built with Y2K vibes.
           </p>
         </div>
       </footer>
