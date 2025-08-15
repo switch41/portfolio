@@ -364,7 +364,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Experience & Achievements Section */}
+      {/* Experience Section */}
       <section id="experience" className="py-20">
         <div className="container mx-auto px-6">
           <motion.h2 
@@ -374,10 +374,10 @@ export default function Landing() {
             viewport={{ once: true }}
             className="text-4xl font-bold text-center mb-16 text-foreground"
           >
-            Experience & Achievements
+            Experience
           </motion.h2>
           
-          <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-16">
+          <div className="max-w-2xl mx-auto">
             {/* Experience Timeline */}
             <div>
               <h3 className="text-2xl font-bold mb-8 text-primary flex items-center">
@@ -406,29 +406,6 @@ export default function Landing() {
                         </li>
                       ))}
                     </ul>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            {/* Achievements */}
-            <div>
-              <h3 className="text-2xl font-bold mb-8 text-primary flex items-center">
-                <Award className="w-6 h-6 mr-3" />
-                Achievements
-              </h3>
-              <div className="space-y-4">
-                {achievements.map((achievement, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    className="glass-card p-4 flex items-start"
-                  >
-                    <GraduationCap className="w-5 h-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
-                    <p className="text-sm text-muted-foreground">{achievement}</p>
                   </motion.div>
                 ))}
               </div>
