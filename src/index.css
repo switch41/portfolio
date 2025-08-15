@@ -48,7 +48,7 @@
   --background: oklch(0.99 0.005 240); /* Almost white */
   --foreground: oklch(0.15 0.02 240); /* Dark gray */
   
-  --card: oklch(1 1 1 / 0.5); /* Semi-transparent white for glass effect */
+  --card: oklch(1 0 0 / 0.5); /* Semi-transparent white for glass effect */
   --card-foreground: oklch(0.15 0.02 240);
 
   --popover: oklch(0.99 0.005 240);

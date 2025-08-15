@@ -3,8 +3,7 @@ import {
   Github, 
   Linkedin, 
   Mail, 
-  MapPin, 
-  ExternalLink,
+  MapPin,
   Code,
   Database,
   Cpu,
@@ -13,11 +12,15 @@ import {
   Briefcase,
   GraduationCap,
   ChevronDown,
-  Star
+  Star,
+  Send
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "sonner";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -108,6 +111,15 @@ const achievements = [
 export default function Landing() {
   const scrollToSection = (sectionId: string) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleContactSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // NOTE: This is a UI demonstration. A backend mutation would be needed to make this form functional.
+    toast.success("Message Sent!", {
+      description: "Thank you for reaching out. I'll get back to you shortly.",
+    });
+    (e.target as HTMLFormElement).reset();
   };
 
   return (
@@ -239,9 +251,6 @@ export default function Landing() {
               <p>
                 I specialize in <span className="font-semibold text-primary/90">Blockchain</span>, <span className="font-semibold text-primary/90">AI/ML</span>, and <span className="font-semibold text-primary/90">full-stack development</span> with strong skills in Python, JavaScript, Solidity, and React.
               </p>
-              <p>
-                I thrive in hackathons, enjoy collaborating with teams, and love turning ideas into functional products. I'm currently seeking remote or hybrid SDE internships starting August 2025 to work on innovative and challenging projects.
-              </p>
             </div>
           </motion.div>
         </div>
@@ -268,7 +277,7 @@ export default function Landing() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="glass-card p-6 hover:scale-103 transition-all duration-300"
+                className="glass-card p-6"
               >
                 <div className="flex justify-between items-start mb-4">
                   <h3 className="text-xl font-bold text-primary">{project.title}</h3>
@@ -287,7 +296,7 @@ export default function Landing() {
                   ))}
                 </div>
                 
-                <div className="flex justify-between items-center">
+                <a href={project.github} target="_blank" rel="noopener noreferrer">
                   <Button 
                     variant="ghost" 
                     size="sm"
@@ -295,14 +304,7 @@ export default function Landing() {
                     <Github className="w-4 h-4 mr-2" />
                     View Code
                   </Button>
-                  <Button 
-                    variant="ghost" 
-                    size="sm"
-                  >
-                    <ExternalLink className="w-4 h-4 mr-2" />
-                    Live Demo
-                  </Button>
-                </div>
+                </a>
               </motion.div>
             ))}
           </div>
@@ -353,7 +355,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Experience Section */}
+      {/* Experience & Achievements Section */}
       <section id="experience" className="py-20">
         <div className="container mx-auto px-6">
           <motion.h2 
@@ -366,36 +368,31 @@ export default function Landing() {
             Experience & Achievements
           </motion.h2>
           
-          <div className="max-w-4xl mx-auto">
-            {/* Experience */}
-            <div className="mb-12">
+          <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-16">
+            {/* Experience Timeline */}
+            <div>
               <h3 className="text-2xl font-bold mb-8 text-primary flex items-center">
                 <Briefcase className="w-6 h-6 mr-3" />
                 Professional Experience
               </h3>
-              <div className="space-y-8">
+              <div className="relative border-l-2 border-border/50 pl-8 space-y-12">
                 {experience.map((exp, index) => (
                   <motion.div
                     key={exp.title}
                     initial={{ opacity: 0, x: -60 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    transition={{ duration: 0.6, delay: index * 0.2 }}
                     viewport={{ once: true }}
-                    className="glass-card p-6"
+                    className="relative"
                   >
-                    <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
-                      <div>
-                        <h4 className="text-lg font-semibold text-primary">{exp.title}</h4>
-                        <p className="text-muted-foreground font-medium">{exp.company}</p>
-                      </div>
-                      <Badge variant="outline" className="mt-2 md:mt-0">
-                        {exp.period}
-                      </Badge>
-                    </div>
-                    <ul className="text-muted-foreground space-y-2">
+                    <div className="absolute -left-[38px] top-1.5 w-4 h-4 bg-primary rounded-full border-4 border-background"></div>
+                    <p className="text-sm text-muted-foreground mb-1">{exp.period}</p>
+                    <h4 className="text-lg font-semibold text-primary">{exp.title}</h4>
+                    <p className="text-muted-foreground font-medium mb-3">{exp.company}</p>
+                    <ul className="text-muted-foreground space-y-2 text-sm">
                       {exp.description.map((desc, i) => (
                         <li key={i} className="flex items-start">
-                          <Star className="w-4 h-4 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                          <Star className="w-3 h-3 text-primary/80 mr-2 mt-1 flex-shrink-0" />
                           {desc}
                         </li>
                       ))}
@@ -409,9 +406,9 @@ export default function Landing() {
             <div>
               <h3 className="text-2xl font-bold mb-8 text-primary flex items-center">
                 <Award className="w-6 h-6 mr-3" />
-                Achievements & Certifications
+                Certifications
               </h3>
-              <div className="grid md:grid-cols-2 gap-4">
+              <div className="space-y-4">
                 {achievements.map((achievement, index) => (
                   <motion.div
                     key={index}
@@ -433,66 +430,59 @@ export default function Landing() {
 
       {/* Contact Section */}
       <section id="contact" className="py-20">
-        <div className="container mx-auto px-6 text-center">
+        <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
+            className="max-w-2xl mx-auto"
           >
-            <h2 className="text-4xl font-bold mb-8 text-foreground">Let's Connect</h2>
-            <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">
-              I'm currently seeking remote or hybrid SDE internships starting August 2025. 
-              Let's discuss how we can work together on innovative projects!
+            <h2 className="text-4xl font-bold text-center mb-8 text-foreground">Let's Connect</h2>
+            <p className="text-lg text-muted-foreground mb-12 text-center">
+              Have a question or want to work together? Drop me a message.
             </p>
             
-            <div className="flex flex-col md:flex-row justify-center items-center gap-8 mb-12">
-              <motion.a
-                href="mailto:kushalparihar013@gmail.com"
-                className="flex items-center text-primary hover:text-primary-foreground hover:bg-primary px-6 py-3 rounded-lg border border-primary transition-all"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Mail className="w-5 h-5 mr-3" />
-                kushalparihar013@gmail.com
-              </motion.a>
-              
-              <motion.div
-                className="flex items-center text-muted-foreground"
-                whileHover={{ scale: 1.05 }}
-              >
-                <MapPin className="w-5 h-5 mr-3 text-primary" />
-                Hyderabad, India
-              </motion.div>
-            </div>
-
-            <div className="flex justify-center space-x-6">
-              {[
-                { icon: Github, href: "https://github.com/switch41", label: "GitHub" },
-                { icon: Linkedin, href: "https://linkedin.com/in/kushal-parihar", label: "LinkedIn" }
-              ].map(({ icon: Icon, href, label }) => (
-                <motion.a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-4 rounded-full border border-border hover:border-primary hover:bg-primary/10 transition-colors"
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Icon className="w-8 h-8" />
-                </motion.a>
-              ))}
-            </div>
+            <form onSubmit={handleContactSubmit} className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
+                <Input placeholder="Your Name" required />
+                <Input type="email" placeholder="Your Email" required />
+              </div>
+              <Textarea placeholder="Your Message" rows={5} required />
+              <div className="text-center">
+                <Button type="submit" size="lg">
+                  Send Message <Send className="w-4 h-4 ml-2" />
+                </Button>
+              </div>
+            </form>
           </motion.div>
         </div>
       </section>
 
       {/* Footer */}
       <footer className="py-8 border-t border-border">
-        <div className="container mx-auto px-6 text-center">
-          <p className="text-muted-foreground">
-            © 2024 Kushal Parihar. Built with React, Tailwind CSS, and Framer Motion.
+        <div className="container mx-auto px-6 text-center text-muted-foreground">
+          <div className="flex justify-center space-x-6 mb-4">
+              {[
+                { icon: Github, href: "https://github.com/switch41", label: "GitHub" },
+                { icon: Linkedin, href: "https://linkedin.com/in/kushal-parihar", label: "LinkedIn" },
+                { icon: Mail, href: "mailto:kushalparihar013@gmail.com", label: "Email" }
+              ].map(({ icon: Icon, href, label }) => (
+                <motion.a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-full hover:text-primary transition-colors"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Icon className="w-6 h-6" />
+                </motion.a>
+              ))}
+            </div>
+          <p className="text-sm">
+            © 2024 Kushal Parihar. All rights reserved.
           </p>
         </div>
       </footer>
