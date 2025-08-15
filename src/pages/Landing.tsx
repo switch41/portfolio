@@ -457,7 +457,7 @@ export default function Landing() {
             <div className="flex flex-col md:flex-row justify-center items-center gap-8 mb-12">
               <motion.a
                 href="mailto:kushalparihar013@gmail.com"
-                className="flex items-center text-primary hover:text-primary-foreground hover:bg-primary px-6 py-3 rounded-lg border border-primary transition-all glow-green"
+                className="flex items-center text-primary hover:text-primary-foreground hover:bg-primary px-6 py-3 rounded-lg border border-primary transition-all"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
