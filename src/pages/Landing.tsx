@@ -115,7 +115,7 @@ export default function Landing() {
               className="text-xl font-bold y2k-gradient-text"
               whileHover={{ scale: 1.05 }}
             >
-              kushal.parihar
+              switch41
             </motion.div>
             <div className="flex items-center space-x-2">
               <div className="hidden md:flex space-x-6">
