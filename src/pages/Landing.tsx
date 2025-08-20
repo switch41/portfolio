@@ -41,25 +41,46 @@ const staggerContainer = {
 
 const projects = [
   {
-    title: "Prediction Market",
-    long: "A decentralized prediction platform on the Ethereum blockchain, enabling users to forecast event outcomes with smart contracts.",
-    tech: ["React", "Solidity", "Web3.js", "MetaMask"],
-    category: "Blockchain",
-    github: "#",
+    title: "Chatbot",
+    long: "An AI-powered chatbot using the Gemini API and a Roboflow image classification model for intelligent, multimodal conversations.",
+    tech: ["Python", "Gemini API", "Roboflow", "Flask"],
+    category: "AI/ML",
+    github: "https://github.com/switch41/chatbot",
   },
   {
-    title: "Redact Tool", 
-    long: "An AI-powered tool for detecting and redacting sensitive data from documents, ensuring privacy and compliance.",
+    title: "Redact",
+    long: "A powerful, user-friendly document redaction tool to protect sensitive information in various document formats.",
     tech: ["Python", "Flask", "NLP", "OpenCV"],
     category: "AI/ML",
-    github: "#",
+    github: "https://github.com/switch41/Redact",
   },
   {
-    title: "Switch Healthcare",
-    long: "A HIPAA-compliant AI healthcare assistant for symptom checking, medication reminders, and patient record management.",
+    title: "Prediction Market",
+    long: "A full-stack blockchain-based prediction market on Ethereum, with a Material-UI frontend and robust smart contract backend.",
+    tech: ["React", "Solidity", "Web3.js", "Material-UI"],
+    category: "Blockchain",
+    github: "https://github.com/switch41/prediction-market",
+  },
+  {
+    title: "Switch HealthCare",
+    long: "A comprehensive, production-ready AI healthcare chatbot for intelligent health monitoring, symptom assessment, and medication management.",
     tech: ["React", "Flask", "Python", "NLP"],
     category: "AI/Healthcare",
-    github: "#",
+    github: "https://github.com/switch41/switch_healthcare",
+  },
+  {
+    title: "Gestures",
+    long: "A gesture-based kiosk system using computer vision to detect and classify hand gestures for a touchless interface.",
+    tech: ["Python", "OpenCV", "MediaPipe", "ML"],
+    category: "Computer Vision",
+    github: "https://github.com/switch41/Gestures",
+  },
+  {
+    title: "Fourleaf",
+    long: "A secure and transparent voting system using blockchain for vote storage and biometric authentication for voter verification.",
+    tech: ["Blockchain", "Python", "Biometrics", "Flask"],
+    category: "Blockchain",
+    github: "https://github.com/switch41/fourleaf",
   },
 ];
 
