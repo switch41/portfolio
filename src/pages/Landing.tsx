@@ -359,13 +359,7 @@ export default function Landing() {
                 className="bg-white/5 p-6 rounded-3xl border border-white/10 backdrop-blur-md group"
               >
                 <h3 className="text-xl sm:text-2xl font-bold text-primary mb-2">{project.title}</h3>
-                <Badge variant="outline" className="mb-4">{project.category}</Badge>
                 <p className="text-muted-foreground mb-4">{project.long}</p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tech.map((tech) => (
-                    <Badge key={tech} variant="secondary">{tech}</Badge>
-                  ))}
-                </div>
                 <a href={project.github} target="_blank" rel="noopener noreferrer">
                   <Button variant="ghost" size="sm" className="y2k-button mt-4">
                     <Github className="w-4 h-4 mr-2" />
