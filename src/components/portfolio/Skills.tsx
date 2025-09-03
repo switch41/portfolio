@@ -16,7 +16,7 @@ export function Skills() {
   }, {} as Record<string, typeof skills>);
 
   return (
-    <section id="skills" className="py-20 relative overflow-hidden">
+    <section id="skills" className="py-20 relative overflow-hidden scroll-mt-24 sm:scroll-mt-28">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
