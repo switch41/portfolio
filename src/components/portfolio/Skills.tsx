@@ -2,10 +2,25 @@ import { api } from "@/convex/_generated/api";
 import { useQuery } from "convex/react";
 import { motion } from "framer-motion";
 import { Loader2 } from "lucide-react";
+import { useMutation } from "convex/react";
+import { useEffect, useState } from "react";
 
 export function Skills() {
   const skills = useQuery(api.skills.list, {});
-  
+  const seedSkills = useMutation(api.mutations.seedSkills);
+  const [seeding, setSeeding] = useState(false);
+
+  useEffect(() => {
+    if (skills && skills.length === 0 && !seeding) {
+      setSeeding(true);
+      seedSkills({})
+        .catch(() => {
+          // no-op: avoid UI crash; page will just show empty state
+        })
+        .finally(() => setSeeding(false));
+    }
+  }, [skills, seeding, seedSkills]);
+
   const groupedSkills = skills?.reduce((acc, skill) => {
     const category = skill.category || "Other";
     if (!acc[category]) {
@@ -36,55 +51,64 @@ export function Skills() {
           </div>
         )}
 
-        <div className="space-y-12">
-          {groupedSkills && Object.entries(groupedSkills).map(([category, skillsInCategory], index) => (
-            <motion.div
-              key={category}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <h3 className="text-xl sm:text-2xl font-bold mb-8 capitalize text-primary text-center md:text-left">
-                {category}
-              </h3>
-              <div className="flex flex-wrap justify-center gap-4">
-                {skillsInCategory.map((skill, skillIndex) => (
-                  <motion.div
-                    key={skill._id}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5, delay: skillIndex * 0.05 }}
-                    viewport={{ once: true }}
-                    whileHover={{ scale: 1.05, y: -5, rotate: 2 }}
-                    className="bg-card/60 backdrop-blur-lg border border-border p-4 rounded-2xl flex items-center gap-4 w-full sm:w-[220px] transition-all duration-300"
-                  >
-                    {skill.logoUrl ? (
-                      <div className="w-10 h-10 flex-shrink-0 bg-black/20 rounded-full flex items-center justify-center p-1.5 shadow-inner shadow-black/50">
-                        <motion.img
-                          src={skill.logoUrl}
-                          alt={`${skill.name} logo`}
-                          className="w-full h-full object-contain"
-                          transition={{ duration: 0.3 }}
-                        />
+        {skills && skills.length === 0 && seeding && (
+          <div className="flex justify-center items-center h-64">
+            <Loader2 className="h-12 w-12 animate-spin text-primary" />
+            <span className="ml-3 text-muted-foreground">Initializing skills…</span>
+          </div>
+        )}
+
+        {skills && skills.length === 0 && seeding ? null : (
+          <div className="space-y-12">
+            {groupedSkills && Object.entries(groupedSkills).map(([category, skillsInCategory], index) => (
+              <motion.div
+                key={category}
+                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+              >
+                <h3 className="text-xl sm:text-2xl font-bold mb-8 capitalize text-primary text-center md:text-left">
+                  {category}
+                </h3>
+                <div className="flex flex-wrap justify-center gap-4">
+                  {skillsInCategory.map((skill, skillIndex) => (
+                    <motion.div
+                      key={skill._id}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.5, delay: skillIndex * 0.05 }}
+                      viewport={{ once: true }}
+                      whileHover={{ scale: 1.05, y: -5, rotate: 2 }}
+                      className="bg-card/60 backdrop-blur-lg border border-border p-4 rounded-2xl flex items-center gap-4 w-full sm:w-[220px] transition-all duration-300"
+                    >
+                      {skill.logoUrl ? (
+                        <div className="w-10 h-10 flex-shrink-0 bg-black/20 rounded-full flex items-center justify-center p-1.5 shadow-inner shadow-black/50">
+                          <motion.img
+                            src={skill.logoUrl}
+                            alt={`${skill.name} logo`}
+                            className="w-full h-full object-contain"
+                            transition={{ duration: 0.3 }}
+                          />
+                        </div>
+                      ) : (
+                        <motion.div
+                          className="bg-primary/20 w-10 h-10 flex-shrink-0 flex items-center justify-center rounded-full text-xl font-bold text-primary shadow-inner shadow-black/50"
+                          transition={{ duration: 0.6 }}
+                        >
+                          {skill.name.charAt(0)}
+                        </motion.div>
+                      )}
+                      <div>
+                        <h4 className="font-bold text-md text-foreground">{skill.name}</h4>
                       </div>
-                    ) : (
-                      <motion.div
-                        className="bg-primary/20 w-10 h-10 flex-shrink-0 flex items-center justify-center rounded-full text-xl font-bold text-primary shadow-inner shadow-black/50"
-                        transition={{ duration: 0.6 }}
-                      >
-                        {skill.name.charAt(0)}
-                      </motion.div>
-                    )}
-                    <div>
-                      <h4 className="font-bold text-md text-foreground">{skill.name}</h4>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          ))}
-        </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
