@@ -13,8 +13,3 @@ A modern, animated developer portfolio showcasing projects, skills, and experien
 - Convex (backend & database)
 - Convex Auth (Email OTP)
 - Resend (email)
-
-## Contributor
-- Kushal Parihar (switch41)
-  - GitHub: https://github.com/switch41
-  - Email: kushalparihar013@gmail.com
