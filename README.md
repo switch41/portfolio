@@ -2,6 +2,8 @@
 
 Live: https://switch41.online/
 
+A modern, animated developer portfolio showcasing projects, skills, and experience.
+
 ## Tech Stack
 - Vite + React 19
 - Typescript
